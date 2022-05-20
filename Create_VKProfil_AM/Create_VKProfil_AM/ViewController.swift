@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        addHierarchy()
         addConstraints()
     }
     
@@ -39,68 +40,29 @@ class ViewController: UIViewController {
         return statusImage
     }()
     
-    private lazy var storyImageView: UIImageView = {
+    private func setupUIImageView(image: String) -> UIImageView {
         let statusImage = UIImageView()
-        statusImage.image = UIImage(named: "camera")
+        statusImage.image = UIImage(named: image)
         return statusImage
-    }()
+    }
     
-    private lazy var postImageView: UIImageView = {
-        let statusImage = UIImageView()
-        statusImage.image = UIImage(named: "pencil")
-        return statusImage
-    }()
-    
-    private lazy var photoImageView: UIImageView = {
-        let statusImage = UIImageView()
-        statusImage.image = UIImage(named: "photo")
-        return statusImage
-    }()
-    
-    private lazy var clipImageView: UIImageView = {
-        let statusImage = UIImageView()
-        statusImage.image = UIImage(named: "play")
-        return statusImage
-    }()
-    
+    private lazy var clipImageView = setupUIImageView(image: "play")
+    private lazy var photoImageView = setupUIImageView(image: "photo")
+    private lazy var postImageView = setupUIImageView(image: "pencil")
+    private lazy var storyImageView = setupUIImageView(image: "camera")
+    private lazy var homeImageView = setupUIImageView(image: "house-1")
+    private lazy var subscribersImageView = setupUIImageView(image: "radiowaves")
+    private lazy var jobImageView = setupUIImageView(image: "bag")
+    private lazy var giftImageView = setupUIImageView(image: "sun")
+    private lazy var informationImageView = setupUIImageView(image: "information")
+   
     private lazy var separatedImageView: UIImageView = {
         let separated = UIImageView()
         separated.backgroundColor = Color.lightGray.color
         separated.translatesAutoresizingMaskIntoConstraints = false
         return separated
     }()
-    
-    private lazy var homeImageView: UIImageView = {
-        let statusImage = UIImageView()
-        statusImage.image = UIImage(named: "house-1")
-        return statusImage
-    }()
-    
-    private lazy var subscribersImageView: UIImageView = {
-        let statusImage = UIImageView()
-        statusImage.image = UIImage(named: "radiowaves")
-        return statusImage
-    }()
-    
-    private lazy var jobImageView: UIImageView = {
-        let statusImage = UIImageView()
-        statusImage.image = UIImage(named: "bag")
-        return statusImage
-    }()
-    
-    private lazy var giftImageView: UIImageView = {
-        let statusImage = UIImageView()
-        statusImage.image = UIImage(named: "sun")
-        return statusImage
-    }()
-    
-    private lazy var informationImageView: UIImageView = {
-        let statusImage = UIImageView()
-        statusImage.image = UIImage(named: "information")
-        return statusImage
-    }()
-    
-    
+
     //MARK: - labels
     
     private lazy var userNameLabel: UILabel = {
@@ -132,79 +94,32 @@ class ViewController: UIViewController {
         let button = UIButton()
         button.setTitleColor(Color.weith.color, for: .normal)
         button.setTitle(TextPage.edit.rawValue, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 20)
+        button.titleLabel?.font = .systemFont(ofSize: 18)
         button.backgroundColor = Color.gray.color
-        let sizeButton = CGSize(width: 200, height: 20)
+        let sizeButton = CGSize(width: 200, height: 18)
         button.clipsToBounds = true
         button.layer.cornerRadius = sizeButton.height / 2
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    private lazy var storyButton: UIButton = {
+    private func setupButton(titleColor: Color, title: TextPage) -> UIButton {
         let button = UIButton()
-        button.setTitleColor(Color.superBlue.color, for: .normal)
-        button.setTitle(TextPage.story.rawValue, for: .normal)
+        button.setTitleColor(titleColor.color, for: .normal)
+        button.setTitle(title.rawValue, for: .normal)
         return button
-    }()
+    }
     
-    private lazy var postButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(Color.superBlue.color, for: .normal)
-        button.setTitle(TextPage.post.rawValue, for: .normal)
-        return button
-    }()
-    
-    private lazy var photoButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(Color.superBlue.color, for: .normal)
-        button.setTitle(TextPage.photo.rawValue, for: .normal)
-        return button
-    }()
-    
-    private lazy var clipButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(Color.superBlue.color, for: .normal)
-        button.setTitle(TextPage.clip.rawValue, for: .normal)
-        return button
-    }()
-    
-    private lazy var homeButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(Color.grayTwo.color, for: .normal)
-        button.setTitle(TextPage.city.rawValue, for: .normal)
-        return button
-    }()
-    
-    private lazy var subscribersButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(Color.grayTwo.color, for: .normal)
-        button.setTitle(TextPage.subscribers.rawValue, for: .normal)
-        return button
-    }()
-    
-    private lazy var jobButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(Color.superBlue.color, for: .normal)
-        button.setTitle(TextPage.job.rawValue, for: .normal)
-        return button
-    }()
-    
-    private lazy var giftButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(Color.blue.color, for: .normal)
-        button.setTitle(TextPage.gift.rawValue, for: .normal)
-        return button
-    }()
-    
-    private lazy var informationButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(Color.weith.color, for: .normal)
-        button.setTitle(TextPage.information.rawValue, for: .normal)
-        return button
-    }()
-    
-    
+    private lazy var storyButton = setupButton(titleColor: .superBlue, title: .story)
+    private lazy var postButton = setupButton(titleColor: .superBlue, title: .post)
+    private lazy var photoButton = setupButton(titleColor: .superBlue, title: .photo)
+    private lazy var clipButton = setupButton(titleColor: .superBlue, title: .clip)
+    private lazy var homeButton = setupButton(titleColor: .grayTwo, title: .city)
+    private lazy var subscribersButton = setupButton(titleColor: .grayTwo, title: .subscribers)
+    private lazy var jobButton = setupButton(titleColor: .superBlue, title: .job)
+    private lazy var giftButton = setupButton(titleColor: .blue, title: .gift)
+    private lazy var informationButton = setupButton(titleColor: .weith, title: .information)
+        
     //MARK: - stackView
     
     private lazy var userInfoStackView: UIStackView = {
@@ -215,7 +130,7 @@ class ViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-
+    
     private lazy var statusStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -223,37 +138,19 @@ class ViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var storyStackView: UIStackView = {
+    private func setupMediaStackView() -> UIStackView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
         return stackView
-    }()
+    }
     
-    private lazy var postInfoStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.distribution = .equalSpacing
-        return stackView
-    }()
-    
-    private lazy var photoInfoStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.distribution = .equalSpacing
-        return stackView
-    }()
-    
-    private lazy var clipInfoStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.distribution = .equalSpacing
-        return stackView
-    }()
+    private lazy var storyStackView = setupMediaStackView()
+    private lazy var postInfoStackView = setupMediaStackView()
+    private lazy var photoInfoStackView = setupMediaStackView()
+    private lazy var clipInfoStackView = setupMediaStackView()
+      
     
     private lazy var mediaStackView: UIStackView = {
         let stackView = UIStackView()
@@ -264,42 +161,20 @@ class ViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var homeStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 14
-        stackView.sizeToFit()
-        return stackView
-    }()
-    
-    private lazy var subscribersStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 20
-        return stackView
-    }()
-    
-    private lazy var jobStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 19
-        return stackView
-    }()
-    
-    private lazy var giftStackView: UIStackView = {
+    private func setupUserInfoStackView() -> UIStackView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 15
+        stackView.sizeToFit()
         return stackView
-    }()
+    }
     
-    private lazy var informationStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 18
-        return stackView
-    }()
-    
+    private lazy var homeStackView = setupUserInfoStackView()
+    private lazy var subscribersStackView = setupUserInfoStackView()
+    private lazy var jobStackView = setupUserInfoStackView()
+    private lazy var giftStackView = setupUserInfoStackView()
+    private lazy var informationStackView = setupUserInfoStackView()
+     
     private lazy var userStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -309,26 +184,28 @@ class ViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-
-//MARK: - constraints
     
+    //MARK: - constraints
 }
+
 extension ViewController {
-    private func addConstraints() {
+    private func addHierarchy() {
         view.addSubview(iconProfilImageView)
         view.addSubview(userInfoStackView)
         view.addSubview(editButton)
         view.addSubview(mediaStackView)
         view.addSubview(separatedImageView)
         view.addSubview(userStackView)
-        
+    }
+    
+    private func addConstraints() {
         statusStackView.addArrangedSubview(statusLabel)
         statusStackView.addArrangedSubview(statusImageView)
         
         userInfoStackView.addArrangedSubview(userNameLabel)
         userInfoStackView.addArrangedSubview(setupStatusButton)
         userInfoStackView.addArrangedSubview(statusStackView)
-       
+        
         storyStackView.addArrangedSubview(storyImageView)
         storyStackView.addArrangedSubview(storyButton)
         
@@ -337,10 +214,10 @@ extension ViewController {
         
         photoInfoStackView.addArrangedSubview(photoImageView)
         photoInfoStackView.addArrangedSubview(photoButton)
-       
+        
         clipInfoStackView.addArrangedSubview(clipImageView)
         clipInfoStackView.addArrangedSubview(clipButton)
-       
+        
         mediaStackView.addArrangedSubview(storyStackView)
         mediaStackView.addArrangedSubview(postInfoStackView)
         mediaStackView.addArrangedSubview(photoInfoStackView)
@@ -367,37 +244,66 @@ extension ViewController {
         userStackView.addArrangedSubview(giftStackView)
         userStackView.addArrangedSubview(informationStackView)
         
-        iconProfilImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        iconProfilImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-        iconProfilImageView.heightAnchor.constraint(equalToConstant: 90).isActive = true
-        iconProfilImageView.widthAnchor.constraint(equalToConstant: 90).isActive = true
+        NSLayoutConstraint.activate([
+            iconProfilImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            iconProfilImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            iconProfilImageView.heightAnchor.constraint(equalToConstant: 90),
+            iconProfilImageView.widthAnchor.constraint(equalToConstant: 90)
+        ])
         
-        userInfoStackView.topAnchor.constraint(equalTo: iconProfilImageView.topAnchor, constant: 10).isActive = true
-        userInfoStackView.bottomAnchor.constraint(equalTo: iconProfilImageView.bottomAnchor, constant: -10).isActive = true
-        userInfoStackView.leadingAnchor.constraint(equalTo: iconProfilImageView.trailingAnchor, constant: 10).isActive = true
-        userInfoStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 20).isActive = true
+        NSLayoutConstraint.activate([
+            userInfoStackView.topAnchor.constraint(equalTo: iconProfilImageView.topAnchor, constant: 10),
+            userInfoStackView.bottomAnchor.constraint(equalTo: iconProfilImageView.bottomAnchor, constant: -10),
+            userInfoStackView.leadingAnchor.constraint(equalTo: iconProfilImageView.trailingAnchor, constant: 10),
+            userInfoStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+        ])
         
-        editButton.topAnchor.constraint(equalTo: iconProfilImageView.bottomAnchor, constant: 10).isActive = true
-        editButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-        editButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        editButton.trailingAnchor.constraint(equalTo:  view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
+        NSLayoutConstraint.activate([
+            editButton.topAnchor.constraint(equalTo: iconProfilImageView.bottomAnchor, constant: 10),
+            editButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            editButton.heightAnchor.constraint(equalToConstant: 40),
+            editButton.trailingAnchor.constraint(equalTo:  view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+        ])
         
-        mediaStackView.topAnchor.constraint(equalTo: editButton.bottomAnchor, constant: 10).isActive = true
-        mediaStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-        mediaStackView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        mediaStackView.trailingAnchor.constraint(equalTo:  editButton.trailingAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            mediaStackView.topAnchor.constraint(equalTo: editButton.bottomAnchor, constant: 10),
+            mediaStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            mediaStackView.heightAnchor.constraint(equalToConstant: 50),
+            mediaStackView.trailingAnchor.constraint(equalTo:  editButton.trailingAnchor)
+        ])
         
+        NSLayoutConstraint.activate([
+            separatedImageView.topAnchor.constraint(equalTo: mediaStackView.bottomAnchor, constant: 5),
+            separatedImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            separatedImageView.heightAnchor.constraint(equalToConstant: 1),
+            separatedImageView.trailingAnchor.constraint(equalTo:  editButton.trailingAnchor)
+        ])
         
-        separatedImageView.topAnchor.constraint(equalTo: mediaStackView.bottomAnchor, constant: 10).isActive = true
-        separatedImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-        separatedImageView.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        separatedImageView.trailingAnchor.constraint(equalTo:  editButton.trailingAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            userStackView.topAnchor.constraint(equalTo: separatedImageView.bottomAnchor, constant: 10),
+            userStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            userStackView.heightAnchor.constraint(equalToConstant: 150),
+            userStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+        ])
         
-        userStackView.topAnchor.constraint(equalTo: separatedImageView.bottomAnchor, constant: 10).isActive = true
-        userStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-        userStackView.heightAnchor.constraint(equalToConstant: 145).isActive = true
-        userStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 20).isActive = true
+        NSLayoutConstraint.activate([
+            clipImageView.heightAnchor.constraint(equalToConstant: 20),
+            photoImageView.heightAnchor.constraint(equalToConstant: 20),
+            postImageView.heightAnchor.constraint(equalToConstant: 20),
+            storyImageView.heightAnchor.constraint(equalToConstant: 20)
+        ])
         
+        NSLayoutConstraint.activate([
+            homeImageView.heightAnchor.constraint(equalToConstant: 18),
+            subscribersImageView.heightAnchor.constraint(equalToConstant: 18),
+            subscribersImageView.trailingAnchor.constraint(equalTo: homeImageView.trailingAnchor),
+            jobImageView.heightAnchor.constraint(equalToConstant: 18),
+            jobImageView.trailingAnchor.constraint(equalTo: homeImageView.trailingAnchor),
+            giftImageView.heightAnchor.constraint(equalToConstant: 18),
+            giftImageView.trailingAnchor.constraint(equalTo: homeImageView.trailingAnchor),
+            informationImageView.heightAnchor.constraint(equalToConstant: 18),
+            informationImageView.trailingAnchor.constraint(equalTo: homeImageView.trailingAnchor)
+        ])
     }
     
     enum TextPage: String {
@@ -406,7 +312,7 @@ extension ViewController {
         case post = "Запись"
         case photo = "Фото"
         case clip = "Клип"
-        case city = "Гданьск"
+        case city = "город: Гданьск"
         case online = "online"
         case edit = "Редактировать"
         case story = "История"
